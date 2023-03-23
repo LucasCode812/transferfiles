@@ -25,8 +25,15 @@ intent_data = {
     }
 }
 
+# Set the authentication credentials
+username = 'your_username'
+password = 'your_password'
+
+# Create the authorization header
+auth_header = f'Basic {base64.b64encode(f"{username}:{password}".encode()).decode()}'
+
 # Send a POST request to create the intent
-response = requests.post(intents_url, json=intent_data)
+response = requests.post(intents_url, json=intent_data, headers={'Authorization': auth_header})
 
 # Print the response status code
 print(f'Response code: {response.status_code}')
