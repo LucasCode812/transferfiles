@@ -10,3 +10,9 @@ make -j8
 sudo make altinstall
 
 python3.7 --version
+
+wget https://bootstrap.pypa.io/get-pip.py
+
+sudo python3.7 get-pip.py
+
+pip3.7 --version
