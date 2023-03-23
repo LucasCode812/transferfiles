@@ -1,3 +1,4 @@
+Install python 3.7:
 cd ~
 wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
 
@@ -11,8 +12,12 @@ sudo make altinstall
 
 python3.7 --version
 
+Install pip3.7
 wget https://bootstrap.pypa.io/get-pip.py
 
 sudo python3.7 get-pip.py
 
 pip3.7 --version
+
+package installeren:
+pip3.7 install <package>
