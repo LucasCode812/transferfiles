@@ -2,7 +2,7 @@ import requests
 import json
 
 # set up the URL for the ONOS REST API
-url = 'http://127.0.0.1:8181/onos/v1/'
+url = 'http://172.17.0.5:8181/onos/v1/'
 
 # create a new Host-to-Host intent
 intent = {
