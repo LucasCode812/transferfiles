@@ -7,7 +7,7 @@ url = 'http://172.17.0.5:8181/onos/v1/'
 # create a new Host-to-Host intent
 intent = {
     'type': 'HostToHostIntent',
-    'appId': 'myApp',
+    'appId': 'org.onosproject.cli',
     'priority': 10,
     'one': '00:00:00:00:00:01/1',
     'two': '00:00:00:00:00:01/1'
