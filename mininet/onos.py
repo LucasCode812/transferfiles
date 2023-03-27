@@ -10,7 +10,7 @@ intent = {
     'appId': 'org.onosproject.cli',
     'priority': 10,
     'one': '00:00:00:00:00:01/1',
-    'two': '00:00:00:00:00:01/1'
+    'two': '00:00:00:00:00:02/1'
 }
 
 # convert the intent to JSON format
