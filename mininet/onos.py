@@ -1,39 +1,32 @@
 import requests
+import json
 
-# Set the controller IP address and port number
-controller_ip = '192.168.1.1'
-controller_port = '8181'
+# set up the URL for the ONOS REST API
+url = 'http://127.0.0.1:8181/onos/v1/'
 
-# Set the source and destination MAC addresses
-src_mac = '00:00:00:00:00:01'
-dst_mac = '00:00:00:00:00:02'
-
-# Define the ONOS REST API endpoint for intents
-intents_url = f'http://{controller_ip}:{controller_port}/onos/v1/intents'
-
-# Define the JSON data for the intent
-intent_data = {
+# create a new Host-to-Host intent
+intent = {
     'type': 'HostToHostIntent',
-    'appId': 'org.onosproject.cli',
-    'one': {
-        'type': 'Host',
-        'mac': src_mac
-    },
-    'two': {
-        'type': 'Host',
-        'mac': dst_mac
-    }
+    'appId': 'myApp',
+    'priority': 10,
+    'one': '00:00:00:00:00:01/1',
+    'two': '00:00:00:00:00:01/1'
 }
 
-# Set the authentication credentials
-username = 'your_username'
-password = 'your_password'
+# convert the intent to JSON format
+data = json.dumps(intent)
 
-# Create the authorization header
-auth_header = f'Basic {base64.b64encode(f"{username}:{password}".encode()).decode()}'
+# set up the headers for the REST API request
+headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+}
 
-# Send a POST request to create the intent
-response = requests.post(intents_url, json=intent_data, headers={'Authorization': auth_header})
+# send the REST API request to ONOS
+response = requests.post(url + 'intents', headers=headers, data=data, auth=('onos', 'rocks'))
 
-# Print the response status code
-print(f'Response code: {response.status_code}')
+# check if the request was successful
+if response.status_code == 200:
+    print('Host-to-Host intent created successfully')
+else:
+    print('Error creating Host-to-Host intent:', response.content)
