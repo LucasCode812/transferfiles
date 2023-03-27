@@ -24,8 +24,4 @@ sudo python3.7 get-pip.py
 pip3.7 --version
 
 package installeren:
-pip3.7 install numpy
-
-Test install:
-python3.7
->>> import numpy
+pip3.7 install requests
