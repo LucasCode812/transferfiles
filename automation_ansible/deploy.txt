@@ -1,0 +1,35 @@
+- name: Deploy a VM from template in vCenter
+  hosts: localhost
+  gather_facts: false
+  become: false
+
+  vars:
+    vcenter_hostname: "ip"
+    vcenter_username: "inlog"
+    vcenter_password: "wachtwoord"
+    datacenter_name: "Datacenter"
+    folder_name: "myvm"
+    template_name: "linux_template"
+    vm_name: "Nginx_SSL"
+
+  tasks:
+    - name: Deploy VM from template
+      community.vmware.vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ datacenter_name }}"
+        folder: "{{ folder_name }}"
+        name: "{{ vm_name }}"
+        state: poweredon
+        template: "{{ template_name }}"
+        disk:
+        - size_gb: 40
+          type: thin
+          datastore: NASBlade4
+        hardware:
+          memory_mb: 2048
+          num_cpus: 2
+          scsi: paravirtual
+        wait_for_ip_address: true

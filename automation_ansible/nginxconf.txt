@@ -1,0 +1,36 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+
+events {
+    worker_connections 1024;
+    # other event-related settings here
+}
+
+http {
+    # Configuration for HTTP
+    server {
+        listen 80;
+        server_name 192.168.104.21;
+        root /var/www/html;  # Change this to the location of your files
+        index index.nginx-debian.html;   # Change this to the default file name if needed
+
+        location / {
+            try_files $uri $uri/ =404;  # Look for files in the root directory
+        }
+    }
+
+    # Configuration for HTTPS
+    server {
+        listen 443 ssl;
+        server_name 192.168.104.21;
+        root /var/www/html;  # Change this to the location of your files
+        index index.nginx-debian.html;   # Change this to the default file name if needed
+        ssl_certificate /etc/ssl/certs/nginx-selfsigned.crt;
+        ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+
+        location / {
+            try_files $uri $uri/ =404;  # Look for files in the root directory
+        }
+    }
+}

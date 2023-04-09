@@ -1,0 +1,20 @@
+- name: Change hostname and IP address
+  hosts: all
+  become: yes
+  remote_user: root
+  ignore_errors: yes
+
+  tasks:
+    - name: Set hostname
+      hostname:
+        name: Host1
+
+    - name: Update and upgrade apt packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Configure network interfaces
+      template:
+        src: /etc/netplan/01-netcfg.yaml.j2
+        dest: /etc/netplan/00-installer-config.yaml
