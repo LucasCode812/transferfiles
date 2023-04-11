@@ -1,0 +1,11 @@
+---
+- name: Start deploy.yml and then install.yml
+  hosts: localhost
+  become: true
+  
+  tasks:
+    - name: Run deploy.yml playbook
+      include_playbook: deploy.yml
+      
+    - name: Run install.yml playbook
+      include_playbook: install.yml
